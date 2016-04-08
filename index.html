@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <style type="text/css">
+        #answers-div {
+            -webkit-column-count: 2; /* Chrome, Safari, Opera */
+            -moz-column-count: 2; /* Firefox */
+            column-count: 2;
+        }
+
+        .question-answer-table {
+            display: inline-block;
+        }
+        .question-answer-table th.option-header{
+            width: 100px;
+        }
+        .question-answer-table th.question-header{
+            width: 100px;
+        }
+        .question-answer-table td {
+            text-align: center;
+            cursor:pointer;
+        }
+        .circle
+        {
+            border-radius:50%;
+            text-align:center;
+            border: thin black;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Demo</h1>
+<div id="answers-div">
+    <table id="answers-table">
+
+    </table>
+</div>
+<button class="btn btn-primary" id="btnSubmitDemo">Submit</button>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+<script src="js/fraction.js"></script>
+<script data-main="js/demo" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.js"></script>
+</body>
+</html>
