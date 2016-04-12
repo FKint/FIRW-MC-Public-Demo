@@ -1,5 +1,4 @@
 define([], function () {
-    console.log('Loading question')
     var Question = function (question, options) {
         this.options = options;
         this.question = question;
@@ -39,10 +38,17 @@ define([], function () {
     };
     Question.prototype.grade = function () {
         var answer = [];
+        console.log('options: '+JSON.stringify(this.getOptions));
         for (var o in this.getOptions()) {
             var option = this.getOptions()[o];
             if (!option.isFilled()) {
-                return null;
+                this.getScoreTD().empty();
+                this.getScoreTD().append(
+                    $('<span>')
+                        .addClass('glyphicon glyphicon-exclamation-sign')
+                        .attr('title', "U moet voor elke antwoordoptie selecteren of u deze mogelijk of onmogelijk acht.")
+                );
+                return;
             }
             answer.push(option.getIndicated());
         }
