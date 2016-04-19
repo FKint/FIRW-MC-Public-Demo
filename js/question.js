@@ -11,7 +11,6 @@ define([], function () {
         return this.question;
     };
     Question.prototype.getScore = function (answer) {
-        console.log(answer);
         var correct_possible = false;
         var nb_possible = 0;
         var nb_impossible = 0;

@@ -54,9 +54,11 @@ define(['sample_data'], function (Data) {
     function setOptionValue(element, value) {
         element.data('selected', value);
         if (value) {
-            element.css('background-color', 'grey');
+            //element.css('background-color', 'grey');
+            element.addClass('selected');
         } else {
-            element.css('background-color', 'white');
+            //element.css('background-color', 'white');
+            element.removeClass('selected');
         }
     }
 
@@ -71,5 +73,19 @@ define(['sample_data'], function (Data) {
                 Data.questions[i].grade();
             }
         });
+        console.log('update resize');
+        function resizeOptions(){
+            console.log('called');
+            $('td.option > span').each(function(){
+                $(this).width($(this).height());
+            })
+        }
+        $(window).resize(function(){
+            resizeOptions();
+        });
+        $('#answers-div').bind("DOMSubtreeModified", function() {
+            resizeOptions();
+        });
+        resizeOptions();
     });
 });
