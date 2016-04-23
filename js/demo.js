@@ -1,7 +1,7 @@
 define(['sample_data'], function (Data) {
     for (var i = 0; i < Data.questions.length; ++i) {
         var question_li = $('<li>').addClass('list-group-item');
-        var h = $('<h2>').text(Data.questions[i].getQuestion());
+        var h = $('<h2>').text("Vraag "+(i+1)+": " + Data.questions[i].getQuestion());
         var options = $('<ul>');
         var tr = $('<tr>');
         var sub_table = $('<table>').addClass('question-answer-table');
@@ -54,10 +54,8 @@ define(['sample_data'], function (Data) {
     function setOptionValue(element, value) {
         element.data('selected', value);
         if (value) {
-            //element.css('background-color', 'grey');
             element.addClass('selected');
         } else {
-            //element.css('background-color', 'white');
             element.removeClass('selected');
         }
     }
@@ -73,9 +71,7 @@ define(['sample_data'], function (Data) {
                 Data.questions[i].grade();
             }
         });
-        console.log('update resize');
         function resizeOptions(){
-            console.log('called');
             $('td.option > span').each(function(){
                 $(this).width($(this).height());
             })

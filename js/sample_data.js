@@ -1,5 +1,4 @@
 define(['question', 'option'], function (Question, QuestionOption) {
-    console.log('Defining Data');
     return {
         questions: [
             new Question("4+5=?", [

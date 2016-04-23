@@ -1,5 +1,4 @@
 define([], function () {
-    console.log('Loading question option');
     var QuestionOption = function (text, correct) {
         this.text = text;
         this.correct = correct;

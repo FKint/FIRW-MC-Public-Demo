@@ -37,7 +37,6 @@ define([], function () {
     };
     Question.prototype.grade = function () {
         var answer = [];
-        console.log('options: '+JSON.stringify(this.getOptions));
         for (var o in this.getOptions()) {
             var option = this.getOptions()[o];
             if (!option.isFilled()) {
@@ -52,7 +51,10 @@ define([], function () {
             answer.push(option.getIndicated());
         }
         var score = this.getScore(answer);
-        this.getScoreTD().text(score.toString());
+        var score_string = score.s*score.n;
+        if (score.d != 1)
+            score_string += "/" + score.d;
+        this.getScoreTD().text(score_string);
     };
     Question.prototype.setScoreTD = function (score_td) {
         this.score_td = score_td;
