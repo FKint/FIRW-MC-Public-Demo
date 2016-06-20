@@ -1,61 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Multiple Choice with Elimination - Demo</title>
-    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
-    <link href='https://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <style type="text/css">
-        #answers-div {
-            -webkit-column-count: 1; /* Chrome, Safari, Opera */
-            -moz-column-count: 1; /* Firefox */
-            column-count: 1;
-        }
+<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+      integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<style type="text/css">
+    #answers-div {
+        -webkit-column-count: 1; /* Chrome, Safari, Opera */
+        -moz-column-count: 1; /* Firefox */
+        column-count: 1;
+    }
 
-        .question-answer-table {
-            display: inline-block;
-        }
-        .question-answer-table th.option-header{
-            /*width: 100px;*/
-        }
-        .question-answer-table th.question-header{
-            /*width: 100px;*/
-            padding-right:50px;
-        }
-        .question-answer-table td {
-            text-align: center;
-            cursor:pointer;
-        }
-        .circle
-        {
-            border-radius:50%;
-            text-align:center;
-            border: thin black;
-        }
-        tr td:not(:first-child),th:not(:first-child) {
-            text-align:center;
-            align-content: center;
-            padding-left:10px;
-            padding-right:10px;
-        }
-        td.option > span{
-            display:block;
-            margin: 1px;
-            border: 1px solid black;
-            text-align: center;
-            vertical-align: center;
-            border-radius:50%;
-            font-family: 'Slabo 27px', serif;
-        }
-        td.selected > span{
-            /*border: 1px solid black;*/
-            background-color: grey;
-        }
-    </style>
-</head>
-<body>
+    .question-answer-table {
+        display: inline-block;
+    }
+
+    .question-answer-table th.option-header {
+        /*width: 100px;*/
+    }
+
+    .question-answer-table th.question-header {
+        /*width: 100px;*/
+        padding-right: 50px;
+    }
+
+    .question-answer-table td {
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .circle {
+        border-radius: 50%;
+        text-align: center;
+        border: thin black;
+    }
+
+    tr td:not(:first-child), th:not(:first-child) {
+        text-align: center;
+        align-content: center;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    td.option > span {
+        display: block;
+        margin: 1px;
+        border: 1px solid black;
+        text-align: center;
+        vertical-align: center;
+        border-radius: 50%;
+        font-family: 'Slabo 27px', serif;
+    }
+
+    td.selected > span {
+        /*border: 1px solid black;*/
+        background-color: grey;
+    }
+</style>
 
 <h1>Demo</h1>
 <ul id="questions-div" class="list-group">
@@ -69,7 +68,429 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
         integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
         crossorigin="anonymous"></script>
-<script src="js/fraction.js"></script>
-<script data-main="js/demo" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.js"></script>
-</body>
-</html>
+<script>
+    /*
+     Fraction.js v3.3.0 09/09/2015
+     http://www.xarg.org/2014/03/precise-calculations-in-javascript/
+
+     Copyright (c) 2015, Robert Eisele (robert@xarg.org)
+     Dual licensed under the MIT or GPL Version 2 licenses.
+     */
+    (function (w) {
+        "use strict";
+        function u(a, c) {
+            if (!a)return c;
+            if (!c)return a;
+            for (; ;) {
+                a %= c;
+                if (!a)return c;
+                c %= a;
+                if (!c)return a
+            }
+        }
+
+        function x(a) {
+            for (; 0 === a % 2; a /= 2);
+            for (; 0 === a % 5; a /= 5);
+            if (1 === a)return 0;
+            for (var c = 10 % a, b = 1; 1 !== c; b++)if (c = 10 * c % a, 2E3 < b)return 0;
+            return b
+        }
+
+        function k(a, c) {
+            var b = 0, l = 1, e = 1, k = 0, n = 0, m = 0, h = 1, q = 1, f = 0, g = 1, t = 1, r = 1;
+            if (void 0 !== a && null !== a)if (void 0 !== c)b = a, l = c, e = b * l; else switch (typeof a) {
+                case "object":
+                    "d" in a && "n" in a ? (b = a.n, l = a.d, "s" in a && (b *= a.s)) : 0 in a ? (b = a[0], 1 in a && (l = a[1])) : v();
+                    e = b * l;
+                    break;
+                case "number":
+                    0 >
+                    a && (e = a, a = -a);
+                    if (0 === a % 1)b = a; else if (0 < a) {
+                        1 <= a && (q = Math.pow(10, Math.floor(1 + Math.log(a) / Math.LN10)), a /= q);
+                        for (; 1E7 >= g && 1E7 >= r;)if (b = (f + t) / (g + r), a === b) {
+                            1E7 >= g + r ? (b = f + t, l = g + r) : r > g ? (b = t, l = r) : (b = f, l = g);
+                            break
+                        } else a > b ? (f += t, g += r) : (t += f, r += g), 1E7 < g ? (b = t, l = r) : (b = f, l = g);
+                        b *= q
+                    } else if (isNaN(a) || isNaN(c))l = b = NaN;
+                    break;
+                case "string":
+                    g = a.match(/\d+|./g);
+                    "-" === g[f] ? (e = -1, f++) : "+" === g[f] && f++;
+                    if (g.length === f + 1)n = p(g[f++], e); else if ("." === g[f + 1] || "." === g[f]) {
+                        "." !== g[f] && (k = p(g[f++], e));
+                        f++;
+                        if (f + 1 === g.length || "(" ===
+                                g[f + 1] && ")" === g[f + 3] || "'" === g[f + 1] && "'" === g[f + 3])n = p(g[f], e), h = Math.pow(10, g[f].length), f++;
+                        if ("(" === g[f] && ")" === g[f + 2] || "'" === g[f] && "'" === g[f + 2])m = p(g[f + 1], e), q = Math.pow(10, g[f + 1].length) - 1, f += 3
+                    } else"/" === g[f + 1] || ":" === g[f + 1] ? (n = p(g[f], e), h = p(g[f + 2], 1), f += 3) : "/" === g[f + 3] && " " === g[f + 1] && (k = p(g[f], e), n = p(g[f + 2], e), h = p(g[f + 4], 1), f += 5);
+                    if (g.length <= f) {
+                        l = h * q;
+                        e = b = m + l * k + q * n;
+                        break
+                    }
+                default:
+                    v()
+            }
+            if (0 === l)throw"DIV/0";
+            d.s = 0 > e ? -1 : 1;
+            d.n = Math.abs(b);
+            d.d = Math.abs(l)
+        }
+
+        function p(a, c) {
+            isNaN(a = parseInt(a, 10)) && v();
+            return a * c
+        }
+
+        function v() {
+            throw"Invalid Param";
+        }
+
+        function e(a, c) {
+            if (!(this instanceof e))return new e(a, c);
+            k(a, c);
+            e.REDUCE ? a = u(d.d, d.n) : a = 1;
+            this.s = d.s;
+            this.n = d.n / a;
+            this.d = d.d / a
+        }
+
+        var d = {s: 1, n: 0, d: 1};
+        e.REDUCE = 1;
+        e.prototype = {
+            s: 1, n: 0, d: 1, abs: function () {
+                return new e(this.n, this.d)
+            }, neg: function () {
+                return new e(-this.s * this.n, this.d)
+            }, add: function (a, c) {
+                k(a, c);
+                return new e(this.s * this.n * d.d + d.s * this.d * d.n, this.d * d.d)
+            }, sub: function (a, c) {
+                k(a, c);
+                return new e(this.s * this.n * d.d - d.s * this.d * d.n, this.d * d.d)
+            }, mul: function (a,
+                              c) {
+                k(a, c);
+                return new e(this.s * d.s * this.n * d.n, this.d * d.d)
+            }, div: function (a, c) {
+                k(a, c);
+                return new e(this.s * d.s * this.n * d.d, this.d * d.n)
+            }, clone: function () {
+                return new e(this)
+            }, mod: function (a, c) {
+                if (isNaN(this.n) || isNaN(this.d))return new e(NaN);
+                if (void 0 === a)return new e(this.s * this.n % this.d, 1);
+                k(a, c);
+                0 === d.n && 0 === this.d && e(0, 0);
+                return new e(this.s * d.d * this.n % (d.n * this.d), d.d * this.d)
+            }, gcd: function (a, c) {
+                k(a, c);
+                return new e(u(d.n, this.n), d.d * this.d / u(d.d, this.d))
+            }, lcm: function (a, c) {
+                k(a, c);
+                return 0 === d.n && 0 ===
+                this.n ? new e : new e(d.n * this.n / u(d.n, this.n), u(d.d, this.d))
+            }, ceil: function (a) {
+                a = Math.pow(10, a || 0);
+                return isNaN(this.n) || isNaN(this.d) ? new e(NaN) : new e(Math.ceil(a * this.s * this.n / this.d), a)
+            }, floor: function (a) {
+                a = Math.pow(10, a || 0);
+                return isNaN(this.n) || isNaN(this.d) ? new e(NaN) : new e(Math.floor(a * this.s * this.n / this.d), a)
+            }, round: function (a) {
+                a = Math.pow(10, a || 0);
+                return isNaN(this.n) || isNaN(this.d) ? new e(NaN) : new e(Math.round(a * this.s * this.n / this.d), a)
+            }, inverse: function () {
+                return new e(this.s * this.d, this.n)
+            },
+            pow: function (a) {
+                return 0 > a ? new e(Math.pow(this.s * this.d, -a), Math.pow(this.n, -a)) : new e(Math.pow(this.s * this.n, a), Math.pow(this.d, a))
+            }, equals: function (a, c) {
+                k(a, c);
+                return this.s * this.n * d.d === d.s * d.n * this.d
+            }, compare: function (a, c) {
+                k(a, c);
+                var b = this.s * this.n * d.d - d.s * d.n * this.d;
+                return (0 < b) - (0 > b)
+            }, divisible: function (a, c) {
+                k(a, c);
+                return !(!(d.n * this.d) || this.n * d.d % (d.n * this.d))
+            }, valueOf: function () {
+                return this.s * this.n / this.d
+            }, toFraction: function (a) {
+                var c, b = "", l = this.n, e = this.d;
+                0 > this.s && (b += "-");
+                1 === e ? b += l :
+                        (a && 0 < (c = Math.floor(l / e)) && (b = b + c + " ", l %= e), b += l, b += "/", b += e);
+                return b
+            }, toLatex: function (a) {
+                var c, b = "", e = this.n, d = this.d;
+                0 > this.s && (b += "-");
+                1 === d ? b += e : (a && 0 < (c = Math.floor(e / d)) && (b += c, e %= d), b = b + "\\frac{" + e, b += "}{", b += d, b += "}");
+                return b
+            }, toContinued: function () {
+                var a, c = this.n, b = this.d, e = [];
+                do e.push(Math.floor(c / b)), a = c % b, c = b, b = a; while (1 !== c);
+                return e
+            }, toString: function () {
+                var a, c = this.n, b = this.d;
+                if (isNaN(c) || isNaN(b))return "NaN";
+                e.REDUCE || (a = u(c, b), c /= a, b /= a);
+                a = String(c).split("");
+                var c = 0, d = [~this.s ?
+                        "" : "-", "", ""], k = "", p = x(b), n;
+                a:{
+                    n = 1;
+                    var m;
+                    m = p;
+                    for (var h = 10, q = 1; 0 < m; h = h * h % b, m >>= 1)m & 1 && (q = q * h % b);
+                    m = q;
+                    for (h = 0; 300 > h; h++) {
+                        if (n === m) {
+                            n = h;
+                            break a
+                        }
+                        n = 10 * n % b;
+                        m = 10 * m % b
+                    }
+                    n = 0
+                }
+                m = -1;
+                for (var h = 1, q = 10 + p + n + a.length, f = 0; f < q; f++, c *= 10) {
+                    f < a.length ? c += Number(a[f]) : (h = 2, m++);
+                    if (0 < p)if (m === n)d[h] += k + "(", k = ""; else if (m === p + n) {
+                        d[h] += k + ")";
+                        break
+                    }
+                    c >= b ? (d[h] += k + (c / b | 0), k = "", c %= b) : 1 < h ? k += "0" : d[h] && (d[h] += "0")
+                }
+                d[0] += d[1] || "0";
+                return d[2] ? d[0] + "." + d[2] : d[0]
+            }
+        };
+        "function" === typeof define && define.amd ? define([], function () {
+            return e
+        }) :
+                "object" === typeof exports ? module.exports = e : w.Fraction = e
+    })(this);
+</script>
+<script>
+    Entry = function (answers) {
+        this.answers = answers;
+    };
+    Entry.prototype.getAnswers = function () {
+        return this.answers;
+    };
+</script>
+<script>
+    QuestionOption = function (text, correct) {
+        this.text = text;
+        this.correct = correct;
+        this.possible_td = null;
+        this.impossible_td = null;
+    };
+    QuestionOption.prototype.getText = function () {
+        return this.text;
+    };
+    QuestionOption.prototype.getCorrect = function () {
+        return this.correct;
+    };
+    QuestionOption.prototype.setImpossibleTD = function (impossible_td) {
+        this.impossible_td = impossible_td;
+    };
+    QuestionOption.prototype.setPossibleTD = function (possible_td) {
+        this.possible_td = possible_td;
+    };
+    QuestionOption.prototype.getImpossibleTD = function () {
+        return this.impossible_td;
+    };
+    QuestionOption.prototype.getPossibleTD = function () {
+        return this.possible_td;
+    };
+    QuestionOption.prototype.getIndicated = function () {
+        return this.possible_td.data('selected');
+    };
+    QuestionOption.prototype.isFilled = function () {
+        return this.possible_td.data('selected') || this.impossible_td.data('selected');
+    };
+</script>
+<script>
+    Question = function (question, options) {
+        this.options = options;
+        this.question = question;
+        this.score_td = null;
+    };
+    Question.prototype.getOptions = function () {
+        return this.options;
+    };
+    Question.prototype.getQuestion = function () {
+        return this.question;
+    };
+    Question.prototype.getScore = function (answer) {
+        var correct_possible = false;
+        var nb_possible = 0;
+        var nb_impossible = 0;
+        var options = this.getOptions();
+        for (var i = 0; i < options.length; ++i) {
+            var o = options[i];
+            if (answer[i]) {
+                nb_possible += 1;
+            } else {
+                nb_impossible += 1;
+            }
+            if (o.correct) {
+                if (answer[i]) {
+                    correct_possible = true;
+                }
+            }
+        }
+        var nb_alternatives = options.length;
+        if (correct_possible) {
+            return Fraction(nb_alternatives - nb_possible, nb_possible * (nb_alternatives - 1));
+        } else {
+            return Fraction(-1, nb_alternatives - 1);
+        }
+    };
+    Question.prototype.grade = function () {
+        var answer = [];
+        for (var o in this.getOptions()) {
+            var option = this.getOptions()[o];
+            if (!option.isFilled()) {
+                this.getScoreTD().empty();
+                this.getScoreTD().append(
+                        $('<span>')
+                                .addClass('glyphicon glyphicon-exclamation-sign')
+                                .attr('title', "U moet voor elke antwoordoptie selecteren of u deze mogelijk of onmogelijk acht.")
+                );
+                return;
+            }
+            answer.push(option.getIndicated());
+        }
+        var score = this.getScore(answer);
+        var score_string = score.s * score.n;
+        if (score.d != 1)
+            score_string += "/" + score.d;
+        this.getScoreTD().text(score_string);
+    };
+    Question.prototype.setScoreTD = function (score_td) {
+        this.score_td = score_td;
+    };
+    Question.prototype.getScoreTD = function (score_td) {
+        return this.score_td;
+    };
+</script>
+<script>
+    Data = {
+        questions: [
+            new Question("4+5=?", [
+                new QuestionOption('7', false),
+                new QuestionOption('8', false),
+                new QuestionOption('9', true),
+                new QuestionOption('10', false)
+            ]),
+            new Question("How many days does a week count?", [
+                new QuestionOption('4', false),
+                new QuestionOption('5', false),
+                new QuestionOption('6', false),
+                new QuestionOption('7', true)
+            ]),
+            new Question("Which city is the capital of France?", [
+                new QuestionOption('Paris', true),
+                new QuestionOption('Brussels', false),
+                new QuestionOption('New York', false),
+                new QuestionOption('London', false),
+                new QuestionOption('Stockholm', false)
+            ])
+        ]
+    };
+</script>
+<script>
+    for (var i = 0; i < Data.questions.length; ++i) {
+        var question_li = $('<li>').addClass('list-group-item');
+        var h = $('<h2>').text("Vraag " + (i + 1) + ": " + Data.questions[i].getQuestion());
+        var options = $('<ul>');
+        var tr = $('<tr>');
+        var sub_table = $('<table>').addClass('question-answer-table');
+        var q = Data.questions[i];
+        var tr1 = $('<tr>')
+                .append($('<th>').addClass('question-header').text('Vraag ' + (i + 1)));
+        var tr2 = $('<tr>')
+                .append($('<th>').text('Kan niet'));
+        var tr3 = $('<tr>')
+                .append($('<th>').text('Kan'));
+        for (var j = 0; j < q.getOptions().length; ++j) {
+            var option_li = $('<li>').text(String.fromCharCode(65 + j) + ": " + q.getOptions()[j].getText());
+            options.append(option_li);
+            tr1.append($('<th>').addClass('option-header').text(String.fromCharCode(65 + j)));
+            var impossible_td =
+                    $('<td>')
+                            .addClass('option')
+                            .data('question', i)
+                            .data('option', j)
+                            .data('value', false)
+                            .data('selected', false)
+                            .append($('<span>').text('-'));
+            var possible_td = $('<td>')
+                    .addClass('option')
+                    .data('question', i)
+                    .data('option', j)
+                    .data('value', true)
+                    .data('selected', false)
+                    .data('other', impossible_td)
+                    .append($('<span>').text('+'));
+            impossible_td.data('other', possible_td);
+            q.getOptions()[j].setPossibleTD(possible_td);
+            q.getOptions()[j].setImpossibleTD(impossible_td);
+            tr2.append(impossible_td);
+            tr3.append(possible_td);
+        }
+        question_li.append(h);
+        question_li.append(options);
+        $('#questions-div').append(question_li);
+        var score_td = $('<td>');
+        q.setScoreTD(score_td);
+        tr1.append(score_td);
+        sub_table.append(tr1);
+        sub_table.append(tr2);
+        sub_table.append(tr3);
+        sub_table.append($('<tr>').css('height', 30));
+        tr.append(sub_table);
+        $('#answers-table').append(tr);
+    }
+    function setOptionValue(element, value) {
+        element.data('selected', value);
+        if (value) {
+            element.addClass('selected');
+        } else {
+            element.removeClass('selected');
+        }
+    }
+
+    $(document).ready(function () {
+        $('#answers-table').on('click', 'td.option', function () {
+            var old_value = $(this).data('selected');
+            setOptionValue($(this), !old_value);
+            setOptionValue($(this).data('other'), old_value);
+        });
+        $('#btnSubmitDemo').click(function () {
+            for (var i = 0; i < Data.questions.length; ++i) {
+                Data.questions[i].grade();
+            }
+        });
+        function resizeOptions() {
+            $('td.option > span').each(function () {
+                $(this).width($(this).height());
+            })
+        }
+
+        $(window).resize(function () {
+            resizeOptions();
+        });
+        $('#answers-div').bind("DOMSubtreeModified", function () {
+            resizeOptions();
+        });
+        resizeOptions();
+    });
+</script>
